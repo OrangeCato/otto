@@ -1,0 +1,75 @@
+  .tasks-container {
+    margin-top: 20px;
+  }
+
+  #logout {
+    margin-left: 50vh;
+    margin-top: 20px;
+    background-color: transparent;
+    color: white;
+    padding: 0;
+  }
+
+  #logout:hover {
+    text-decoration: underline; 
+  }
+
+  .tasks-header {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .tasks-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  #delete:hover {
+    background-color: rgb(206, 0, 0);
+  }
+  
+  .task-item input[type="text"] {
+    flex: 1;
+    padding: 5px;
+  }
+  
+  .task-item button {
+    border: none;
+    padding: 6px 12px;
+    margin-left: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .new-task-container {
+    margin-top: 20px;
+  }
+  
+  .new-task-container input[type="text"] {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .new-task-container button {
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .new-task-container button:hover {
+    background-color: #45a049;
+  }
