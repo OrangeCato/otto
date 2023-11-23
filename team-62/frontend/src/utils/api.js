@@ -44,3 +44,65 @@ export const registerUser = async (userData) => {
     throw error;
   }
 };
+
+export const addTask = async (newTaskData) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/tasks/add`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newTaskData),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(`Task addition failed: ${errorData.message || 'Unknown error'}`);
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error('Task addition error:', error);
+    throw error;
+  }
+};
+
+export const updateTask = async (taskId, updatedTaskName) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/tasks/update/${taskId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ taskName: updatedTaskName }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(`Task update failed: ${errorData.message || 'Unknown error'}`);
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error('Task update error:', error);
+    throw error;
+  }
+};
+
+export const deleteTask = async (taskId) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/tasks/delete/${taskId}`, {
+      method: 'DELETE',
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(`Task deletion failed: ${errorData.message || 'Unknown error'}`);
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error('Task deletion error:', error);
+    throw error;
+  }
+};

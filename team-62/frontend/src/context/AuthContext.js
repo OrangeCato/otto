@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import { registerUser } from '../utils/api'; // Import the registerUser function from api.js
+import { registerUser } from '../utils/api';
 
 const AuthContext = createContext();
 
@@ -20,9 +20,8 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (userData) => {
     try {
-      // Call the registerUser function from api.js with user data
-      const registeredUser = await registerUser(userData);
-      login(registeredUser);
+      await registerUser(userData);
+      return null;
     } catch (error) {
       console.error('Registration error:', error);
       throw error;

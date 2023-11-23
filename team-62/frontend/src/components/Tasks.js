@@ -3,7 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import '../assets/tasks.css';
 
 const Tasks = () => {
-  const { user } = useAuth();
+  const { user} = useAuth();
   const [newTask, setNewTask] = useState("");
   const [editedTask, setEditedTask] = useState("");
   const [editTaskId, setEditTaskId] = useState(null);

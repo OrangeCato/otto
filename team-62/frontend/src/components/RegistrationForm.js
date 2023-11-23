@@ -1,31 +1,29 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import '../assets/form.css';
 
 const RegistrationForm = ({ history }) => { // Include the history object
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
   const { register } = useAuth();
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
     try {
-      // Call the registerUser function from api.js
       const user = await register({ name, email, password, tasks: []});
 
-      if (user) {
-        console.log('Registration successful:', user);
-        // Redirect the user to the login page after successful registration
-        history.push('/login');
+      if (user === null) {
+        console.log('Registration successful');
+        navigate('/login');
       } else {
         console.error('Registration failed: Invalid response');
-        // Handle errors, e.g., display an error message to the user
       }
     } catch (error) {
       console.error('Registration failed:', error.message);
-      // Handle other error cases, e.g., display an error message to the user
     }
   };
 
