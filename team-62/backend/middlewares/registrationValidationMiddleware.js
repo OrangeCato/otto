@@ -1,4 +1,4 @@
-exports.validateInput = (req, res, next) => {
+exports.validateRegisterInput = (req, res, next) => {
     const { email, password, name } = req.body;
   
     if (!email || !password || !name) {

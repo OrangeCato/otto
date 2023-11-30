@@ -1,58 +1,77 @@
-import React, { createContext, useContext, useState } from 'react';
-import { registerUser } from '../utils/api';
+import React, { createContext, useContext, useState } from 'react'
+import {
+  registerUser,
+  addTask as addTaskAPI,
+  updateTask as updateTaskAPI,
+  deleteTask as deleteTaskAPI,
+} from '../utils/api'
 
-const AuthContext = createContext();
+const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  // Initialize user as null
+  const [user, setUser] = useState(null)
 
   const login = (userData) => {
-    // handle user login logic, set user in state
-    console.log('Setting user:', userData);
-    setUser(userData);
-  };
+    console.log('Setting user:', userData)
+    // Ensure userData includes a tasks array
+    setUser({ ...userData, tasks: userData.tasks || [] })
+  }
 
   const logout = () => {
-    // handle user logout logic, clear user from state
-    console.log('Logging out');
-    setUser(null);
-  };
+    console.log('Logging out')
+    setUser(null) // Set user to null on logout
+  }
 
   const register = async (userData) => {
     try {
-      await registerUser(userData);
-      return null;
+      await registerUser(userData)
+      return null
     } catch (error) {
-      console.error('Registration error:', error);
-      throw error;
+      console.error('Registration error:', error)
+      throw error
     }
-  };
+  }
 
-  const addTask = (newTask) => {
-    // Add a new task to the user's tasks array and update user state
-    setUser((prevUser) => ({
-      ...prevUser,
-      tasks: [...prevUser.tasks, newTask],
-    }));
-  };
+  const addTask = async (newTask) => {
+    try {
+      const addedTask = await addTaskAPI(newTask)
+      setUser((prevUser) => ({
+        ...prevUser,
+        tasks: prevUser ? [...prevUser.tasks, addedTask] : [addedTask],
+      }))
+    } catch (error) {
+      console.error('Error adding task:', error)
+    }
+  }
 
-  const updateTask = (taskId, updatedTaskName) => {
-    // Update a task by its ID and taskName and update user state
-    setUser((prevUser) => ({
-      ...prevUser,
-      tasks: prevUser.tasks.map((task) =>
-        task._id === taskId ? { ...task, taskName: updatedTaskName } : task
-      ),
-    }));
-  };
+  // Update a task
+  const updateTask = async (taskId, updatedTask) => {
+    try {
+      const updatedTaskData = await updateTaskAPI(taskId, updatedTask)
+      setUser((prevUser) => ({
+        ...prevUser,
+        tasks: prevUser.tasks.map((task) =>
+          task._id === taskId ? { ...task, ...updatedTaskData } : task,
+        ),
+      }))
+    } catch (error) {
+      console.error('Error updating task:', error)
+    }
+  }
 
-  const deleteTask = (taskId) => {
-    // Delete a task by its ID and update user state
-    setUser((prevUser) => ({
-      ...prevUser,
-      tasks: prevUser.tasks.filter((task) => task._id !== taskId),
-    }));
-  };
+  // Delete a task
+  const deleteTask = async (taskId) => {
+    try {
+      await deleteTaskAPI(taskId)
+      setUser((prevUser) => ({
+        ...prevUser,
+        tasks: prevUser.tasks.filter((task) => task._id !== taskId),
+      }))
+    } catch (error) {
+      console.error('Error deleting task:', error)
+    }
+  }
 
   const contextValue = {
     user,
@@ -61,14 +80,14 @@ export const AuthProvider = ({ children }) => {
     register,
     addTask,
     updateTask,
-    deleteTask
-  };
+    deleteTask,
+  }
 
   return (
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
-  );
-};
+  )
+}
 
 export const useAuth = () => {
-  return useContext(AuthContext);
-};
+  return useContext(AuthContext)
+}

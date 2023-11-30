@@ -1,4 +1,4 @@
-exports.validateTaskInput = (req, res, next) => {
+exports.taskValidationMiddleware = (req, res, next) => {
     const { taskname, rating } = req.body;
   
     if (!taskname || !rating) {
@@ -12,4 +12,3 @@ exports.validateTaskInput = (req, res, next) => {
   
     next();
   };
-  

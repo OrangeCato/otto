@@ -47,7 +47,7 @@ export const registerUser = async (userData) => {
 
 export const addTask = async (newTaskData) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/tasks/add`, {
+    const response = await fetch(`${API_BASE_URL}/api/users/tasks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ export const addTask = async (newTaskData) => {
 
 export const updateTask = async (taskId, updatedTaskName) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/tasks/update/${taskId}`, {
+    const response = await fetch(`${API_BASE_URL}/api/users/tasks/update/${taskId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ export const updateTask = async (taskId, updatedTaskName) => {
 
 export const deleteTask = async (taskId) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/tasks/delete/${taskId}`, {
+    const response = await fetch(`${API_BASE_URL}/api/users/tasks/delete/${taskId}`, {
       method: 'DELETE',
     });
 

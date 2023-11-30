@@ -28,7 +28,6 @@ const UserProfile = () => {
     <div className='container'>
       <button onClick={handleLogout} id="logout">Logout</button>
       <h1>Profile</h1>
-      <h1>User Profile</h1>
       <p>Hello, {user.user.name}!</p>
       {/* Additional user profile information can be displayed here */}
       <Tasks/>
