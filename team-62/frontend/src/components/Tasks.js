@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState} from 'react'
 import { useAuth } from '../context/AuthContext'
 import '../assets/tasks.css'
 
@@ -28,11 +28,11 @@ const StarRating = ({ rating, setRating, editable = false }) => {
   )
 }
 const Tasks = () => {
-  const { user, addTask, updateTask, deleteTask } = useAuth()
-  const [newTask, setNewTask] = useState({ taskname: '', rating: 1 })
-  const [editedTask, setEditedTask] = useState({ taskname: '', rating: 1 })
-  const [editTaskId, setEditTaskId] = useState(null)
-  const [showNewTaskForm, setShowNewTaskForm] = useState(false)
+  const { user, addTask, updateTask, deleteTask } = useAuth();
+  const [newTask, setNewTask] = useState({ taskname: '', rating: 1 });
+  const [editedTask, setEditedTask] = useState({ taskname: '', rating: 1 });
+  const [editTaskId, setEditTaskId] = useState(null);
+  const [showNewTaskForm, setShowNewTaskForm] = useState(false);
 
   const handleAddTask = () => {
     // Check if the newTask's taskname is not empty

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useState, useEffect } from 'react'
 import {
   registerUser,
   loginUser,
@@ -6,12 +6,50 @@ import {
   updateTask as updateTaskAPI,
   deleteTask as deleteTaskAPI,
 } from '../utils/api'
+import webSocketService from '../utils/webSocketService'
 
 const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
-  // Initialize user as null
   const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    const handleTaskUpdate = (data) => {
+      setUser((prevUser) => {
+        let updatedTasks
+        switch (data.type) {
+          case 'add':
+            updatedTasks = [...prevUser.tasks, data.task]
+            break
+          case 'update':
+            updatedTasks = prevUser.tasks.map((task) =>
+              task._id === data.task._id ? { ...task, ...data.task } : task,
+            )
+            break
+          case 'delete':
+            updatedTasks = prevUser.tasks.filter(
+              (task) => task._id !== data.taskId,
+            )
+            break
+          default:
+            updatedTasks = prevUser.tasks
+        }
+        return { ...prevUser, tasks: updatedTasks }
+      })
+    }
+
+    if (user) {
+      webSocketService.connect()
+      webSocketService.on('taskUpdate', handleTaskUpdate)
+    } else {
+      webSocketService.disconnect()
+    }
+
+    return () => {
+      webSocketService.off('taskUpdate', handleTaskUpdate)
+    }
+  }, [user])
+
   const login = async (email, password) => {
     try {
       const { token, user } = await loginUser({ email, password })
@@ -39,39 +77,23 @@ export const AuthProvider = ({ children }) => {
 
   const addTask = async (newTask) => {
     try {
-      const addedTask = await addTaskAPI(newTask)
-      setUser((prevUser) => ({
-        ...prevUser,
-        tasks: [...prevUser.tasks, addedTask],
-      }))
+      await addTaskAPI(newTask)
     } catch (error) {
       console.error('Error adding task:', error)
     }
   }
 
-  // Update a task
   const updateTask = async (taskId, updatedTask) => {
     try {
-      const updatedTaskData = await updateTaskAPI(taskId, updatedTask)
-      setUser((prevUser) => ({
-        ...prevUser,
-        tasks: prevUser.tasks.map((task) =>
-          task._id === taskId ? { ...task, ...updatedTaskData } : task,
-        ),
-      }))
+      await updateTaskAPI(taskId, updatedTask)
     } catch (error) {
       console.error('Error updating task:', error)
     }
   }
 
-  // Delete a task
   const deleteTask = async (taskId) => {
     try {
       await deleteTaskAPI(taskId)
-      setUser((prevUser) => ({
-        ...prevUser,
-        tasks: prevUser.tasks.filter((task) => task._id !== taskId),
-      }))
     } catch (error) {
       console.error('Error deleting task:', error)
     }
@@ -92,6 +114,4 @@ export const AuthProvider = ({ children }) => {
   )
 }
 
-export const useAuth = () => {
-  return useContext(AuthContext)
-}
+export const useAuth = () => useContext(AuthContext)
