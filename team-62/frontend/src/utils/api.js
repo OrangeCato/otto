@@ -75,7 +75,7 @@ export const addTask = async (newTaskData) => {
   }
 };
 
-export const updateTask = async (taskId, updatedTaskName) => {
+export const updateTask = async (taskId, updatedTask) => {
   try {
     const response = await fetch(`${API_BASE_URL}/api/users/tasks/update/${taskId}`, {
       method: 'PUT',
@@ -83,7 +83,7 @@ export const updateTask = async (taskId, updatedTaskName) => {
         'Content-Type': 'application/json',
         ...getAuthHeader(),
       },
-      body: JSON.stringify({ taskName: updatedTaskName }),
+      body: JSON.stringify(updatedTask),
     });
 
     if (!response.ok) {
@@ -102,6 +102,9 @@ export const deleteTask = async (taskId) => {
   try {
     const response = await fetch(`${API_BASE_URL}/api/users/tasks/delete/${taskId}`, {
       method: 'DELETE',
+      headers: {
+        ...getAuthHeader(),
+      },
     });
 
     if (!response.ok) {
