@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../assets/form.css';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { loginUser } from '../utils/api';
+//import { loginUser } from '../utils/api';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -13,22 +13,13 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       console.log('Attempting login...');
-
-      const user = await loginUser({ email, password });
-
-      console.log('Login response:', user);
-
-      if (user) {
-        console.log('Login successful:', user);
-        login(user);
-        navigate('/profile');
-      } else {
-        console.error('Login failed: Invalid credentials');
-        // You can set an error state here or display an error message to the user.
-      }
+      // Directly pass email and password to the login function
+      await login(email, password);
+      // Navigate to profile after successful login
+      navigate('/profile');
     } catch (error) {
       console.error('Login failed:', error.message);
-      // Handle other error cases, e.g., network issues.
+      // Handle login errors (e.g., display an error message)
     }
   };
 

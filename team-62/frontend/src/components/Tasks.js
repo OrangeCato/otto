@@ -53,7 +53,6 @@ const Tasks = () => {
       // Find the task by its _id and update its taskName and rating
       const updatedTask = { ...editedTask }
       updateTask(editTaskId, updatedTask)
-
       // Reset the editing state
       setEditTaskId(null)
       setEditedTask({ taskname: '', rating: 1 })
@@ -69,8 +68,8 @@ const Tasks = () => {
     <div className="task-container">
       <h1 className="task-header">Tasks</h1>
       <ul className="tasks-list">
-        {user.user.tasks && user.user.tasks.length > 0 ? (
-          user.user.tasks.map((task) => (
+        {user && user.tasks && user.tasks.length > 0 ? (
+          user.tasks.map((task) => (
             <li key={task._id} className="task-item">
               {editTaskId === task._id ? (
                 <>
@@ -95,7 +94,7 @@ const Tasks = () => {
               ) : (
                 <>
                   <div>{task.taskname}</div>
-                  <div className='rating'>
+                  <div className="rating">
                     <StarRating rating={+task.rating} />
                   </div>
                   <div className="task-item-controls">
@@ -132,14 +131,14 @@ const Tasks = () => {
               }
               placeholder="Task name"
             />
-            <div className='rating'>
-            <StarRating
-              rating={newTask.rating}
-              setRating={(newRating) =>
-                setNewTask({ ...newTask, rating: newRating })
-              }
-              editable
-            />
+            <div className="rating">
+              <StarRating
+                rating={newTask.rating}
+                setRating={(newRating) =>
+                  setNewTask({ ...newTask, rating: newRating })
+                }
+                editable
+              />
             </div>
             <button
               onClick={() => {

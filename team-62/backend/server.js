@@ -5,6 +5,12 @@ const bodyParser = require('body-parser');
 const userRoutes = require('./routes/userRoutes');
 require('dotenv').config();
 
+// Check if JWT_SECRET is defined
+if (!process.env.JWT_SECRET) {
+  console.error('FATAL ERROR: JWT_SECRET is not defined.');
+  process.exit(1); // Exit the application if JWT_SECRET is not set
+}
+
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

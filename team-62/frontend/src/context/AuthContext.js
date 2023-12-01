@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState } from 'react'
 import {
   registerUser,
+  loginUser,
   addTask as addTaskAPI,
   updateTask as updateTaskAPI,
   deleteTask as deleteTaskAPI,
@@ -11,15 +12,18 @@ const AuthContext = createContext()
 export const AuthProvider = ({ children }) => {
   // Initialize user as null
   const [user, setUser] = useState(null)
-
-  const login = (userData) => {
-    console.log('Setting user:', userData)
-    // Ensure userData includes a tasks array
-    setUser({ ...userData, tasks: userData.tasks || [] })
+  const login = async (email, password) => {
+    try {
+      const { token, user } = await loginUser({ email, password })
+      localStorage.setItem('token', token)
+      setUser(user) // Assuming user contains the necessary data
+    } catch (error) {
+      console.error('Login error:', error)
+    }
   }
-
   const logout = () => {
     console.log('Logging out')
+    localStorage.removeItem('token') // Remove the token
     setUser(null) // Set user to null on logout
   }
 
@@ -38,7 +42,7 @@ export const AuthProvider = ({ children }) => {
       const addedTask = await addTaskAPI(newTask)
       setUser((prevUser) => ({
         ...prevUser,
-        tasks: prevUser ? [...prevUser.tasks, addedTask] : [addedTask],
+        tasks: [...prevUser.tasks, addedTask],
       }))
     } catch (error) {
       console.error('Error adding task:', error)

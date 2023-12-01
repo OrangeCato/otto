@@ -1,6 +1,12 @@
 const API_BASE_URL = 'http://localhost:3000';
 
+const getAuthHeader = () => {
+  const token = localStorage.getItem('token');
+  return { 'x-auth-token': token };
+};
+
 export const loginUser = async (userData) => {
+  //console.log("Login userData:", userData)
   try {
     const response = await fetch(`${API_BASE_URL}/api/users/login`, {
       method: 'POST',
@@ -12,6 +18,7 @@ export const loginUser = async (userData) => {
 
     if (response.ok) {
       const user = await response.json();
+      localStorage.setItem('token', user.token); // Store the token
       return user;
     } else {
       const errorData = await response.json();
@@ -51,6 +58,7 @@ export const addTask = async (newTaskData) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        ...getAuthHeader(),
       },
       body: JSON.stringify(newTaskData),
     });
@@ -73,6 +81,7 @@ export const updateTask = async (taskId, updatedTaskName) => {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        ...getAuthHeader(),
       },
       body: JSON.stringify({ taskName: updatedTaskName }),
     });
