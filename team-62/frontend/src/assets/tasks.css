@@ -1,0 +1,104 @@
+.tasks-container {
+  margin-top: 20px;
+}
+
+.task-item {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: flex-start; /* Align items to the start of the container */
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.task-item div, 
+.task-item button {
+  margin-bottom: 5px; /* Spacing between elements */
+}
+
+.task-item-controls {
+  display: flex;
+  justify-content: flex-start; /* Align buttons to the start */
+}
+
+#logout {
+  margin-left: 50vh;
+  margin-top: 20px;
+  background-color: transparent;
+  color: white;
+  padding: 0;
+}
+
+#logout:hover {
+  text-decoration: underline;
+}
+
+.tasks-header {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.tasks-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#delete:hover {
+  background-color: rgb(206, 0, 0);
+}
+
+.task-item input[type="text"] {
+  flex: 1;
+  padding: 5px;
+}
+
+.task-item button {
+  border: none;
+  padding: 6px 12px;
+  margin: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.new-task-container {
+  margin-top: 20px;
+}
+
+.new-task-container input[type="text"] {
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.new-task-container button {
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.new-task-container button:hover {
+  background-color: #45a049;
+}
+
+.rating {
+  background-color: white;
+  padding: 3px 15px;
+  margin: 5px;
+  border-radius: 10px;
+}
+
+.filled-star {
+  color: rgb(241, 194, 41);
+  font-size: 20px;
+}
+
+.empty-star {
+  color: lightgray;
+  font-size: 20px;
+}
+
