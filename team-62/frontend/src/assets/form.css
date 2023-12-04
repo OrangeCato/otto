@@ -24,7 +24,7 @@ body {
   }
   
   label {
-    margin: 10px;
+    margin: 5px;
     font-size: 1.2em;
   }
   
@@ -39,11 +39,10 @@ body {
   }
   
   button {
-    margin-top: 20px;
     padding: 10px 20px;
     font-size: 1.2em;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     background-color: #FFFFFF;
     color: #270546;
     cursor: pointer;

@@ -9,7 +9,7 @@ const WelcomePage = () => {
   return (
     <div className='container'>
       <h1>Welcome</h1>
-      <img className="logo" src="./logo_team62.png" alt="Logo" />
+      <img className="logo" src="./icons/logo.png" alt="Logo" />
       {user ? (
         <p>
           Hello, {user.name}! You are already logged in.{' '}
