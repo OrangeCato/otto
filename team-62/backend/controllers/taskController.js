@@ -1,4 +1,4 @@
-const User = require('../models/user');
+const User = require('../models/User.js');
 
 // This will hold the reference to the Socket.IO instance
 let io;

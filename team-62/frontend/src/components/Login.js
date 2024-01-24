@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../assets/form.css';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import Header from './Header';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -23,6 +24,8 @@ const Login = () => {
   };
 
   return (
+    <div>
+      <Header/>
     <div className="container">
       <form>
         <h1>Login</h1>
@@ -46,6 +49,7 @@ const Login = () => {
           Login
         </button>
       </form>
+    </div>
     </div>
   );
 };

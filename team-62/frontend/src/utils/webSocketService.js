@@ -6,7 +6,9 @@ class WebSocketService {
     socket;
 
     connect() {
-        this.socket = io(SOCKET_URL);
+        this.socket = io(SOCKET_URL, {
+            // Additional options if needed
+        });
 
         this.socket.on('connect', () => {
             console.log('WebSocket Connected');
@@ -23,6 +25,12 @@ class WebSocketService {
         }
     }
 
+    emit(eventName, data) {
+        if (this.socket) {
+            this.socket.emit(eventName, data);
+        }
+    }
+
     off(eventName, callback) {
         if (this.socket) {
             this.socket.off(eventName, callback);
@@ -34,6 +42,18 @@ class WebSocketService {
             this.socket.disconnect();
         }
     }
+
+    // Example: Subscribe to task updates
+    subscribeToTaskUpdates(callback) {
+        this.on('taskUpdated', callback);
+    }
+
+    // Example: Notify server about task completion
+    notifyTaskCompletion(taskId) {
+        this.emit('taskCompleted', { taskId });
+    }
+
+    // Add more event-specific methods as needed...
 }
 
 const webSocketService = new WebSocketService();

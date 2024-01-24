@@ -1,36 +1,44 @@
-import React, { useState } from 'react'
-import { useAuth } from '../context/AuthContext'
-import { useNavigate } from 'react-router-dom'
-import '../assets/form.css'
+import React, { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
+import { useNavigate, Link } from 'react-router-dom';
+import '../assets/form.css';
 
 const RegistrationForm = () => {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const navigate = useNavigate()
-  const { register } = useAuth()
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
+  const { register } = useAuth();
 
   const handleRegister = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    setLoading(true);
+    setErrorMessage('');
 
     try {
-      const user = await register({ name, email, password, tasks: [] })
+      const user = await register({ name, email, password});
 
       if (user === null) {
-        console.log('Registration successful')
-        navigate('/login')
+        console.log('Registration successful');
+        navigate('/login');
       } else {
-        console.error('Registration failed: Invalid response')
+        console.error('Registration failed: Invalid response');
       }
     } catch (error) {
-      console.error('Registration failed:', error.message)
+      console.error('Registration failed:', error.message);
+      setErrorMessage(error.message);
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="container">
-      <form>
+      <form onSubmit={handleRegister}>
         <h1>Register</h1>
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
         <label>Name</label>
         <input
           type="text"
@@ -53,17 +61,17 @@ const RegistrationForm = () => {
           required
         />
         <br />
-        <button type="button" onClick={handleRegister}>
-          Register
+        <button type="submit" disabled={loading}>
+          {loading ? 'Registering...' : 'Register'}
         </button>
         <p>
           Already have an account?
           <br />
-          <a href="/login">Login</a> instead.
+          <Link to="/login">Login</Link> instead.
         </p>
       </form>
     </div>
-  )
-}
+  );
+};
 
 export default RegistrationForm

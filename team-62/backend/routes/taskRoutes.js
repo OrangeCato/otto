@@ -1,33 +1,30 @@
-const express = require('express')
-const router = express.Router()
-const taskController = require('../controllers/taskController')
-const {
-  taskValidationMiddleware,
-} = require('../middlewares/taskValidationMiddleware')
-const { authenticateUser } = require('../middlewares/authenticationMiddleware')
+const express = require('express');
+const router = express.Router();
+const taskController = require('../controllers/taskController');
+const { taskValidationMiddleware } = require('../middlewares/taskValidationMiddleware');
+const { authenticateUser } = require('../middlewares/authenticationMiddleware');
 
-// Temporarily simplified route for testing
+// Create a new task
 router.post(
   '/',
   authenticateUser,
   taskValidationMiddleware,
-  taskController.createTask,
-)
-// Update a task
+  taskController.createTask
+);
+
+// Update an existing task
 router.put(
-  '/update/:taskId',
+  '/:taskId',
   authenticateUser,
   taskValidationMiddleware,
-  taskController.updateTask,
-)
+  taskController.updateTask
+);
 
 // Delete a task
 router.delete(
-  '/delete/:taskId',
+  '/:taskId',
   authenticateUser,
-  taskController.deleteTask,
-)
+  taskController.deleteTask
+);
 
-// ... other routes ...
-
-module.exports = router
+module.exports = router;

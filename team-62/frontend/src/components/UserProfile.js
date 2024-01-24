@@ -31,7 +31,7 @@ const UserProfile = () => {
         <p>Hello, {user.name}!</p>
         <button onClick={() => navigate('/tasks')} id="task-list">Your Tasks</button>
         <br/>
-        <button onClick={() => navigate('/account')} id="config">Account</button>
+        <button onClick={() => navigate('/account')} id="account">Account</button>
       </div>
     </div>
   )

@@ -1,0 +1,14 @@
+bcryptjs
+body-parser
+fors
+csurf
+dotenv
+express
+express-rate-limit
+express-validator
+helmet
+http
+iconv-lite
+jsonwebtoken
+mongoose
+socket.io

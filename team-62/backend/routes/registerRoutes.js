@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { validateRegisterInput} = require('../middlewares/registrationValidationMiddleware');
-const {registerUser} = require('../controllers/registerController');
+const { validateRegisterInput } = require('../middlewares/registrationValidationMiddleware');
+const { registerUser } = require('../controllers/registerController');
 
-router.post('/', validateRegisterInput, registerUser);
+// Endpoint for user registration
+router.post('/register', validateRegisterInput, registerUser);
 
 module.exports = router;
