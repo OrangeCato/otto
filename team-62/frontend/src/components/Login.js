@@ -2,33 +2,33 @@ import React, { useState } from 'react';
 import '../assets/form.css';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import Header from './Header';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const navigate = useNavigate();
   const { login } = useAuth();
 
   const handleLogin = async () => {
     try {
       console.log('Attempting login...');
-      // Directly pass email and password to the login function
       await login(email, password);
-      // Navigate to profile after successful login
-      navigate('/home');
+      setSuccessMessage('Login successful! Redirecting...');
+      setTimeout(() => {
+        navigate('/home');
+      }, 1000); // Redirect after 1 second
     } catch (error) {
       console.error('Login failed:', error.message);
-      // Handle login errors (e.g., display an error message)
+      setSuccessMessage(''); // Clear success message in case of an error
     }
   };
 
   return (
-    <div>
-      <Header/>
     <div className="container">
       <form>
         <h1>Login</h1>
+        {successMessage && <div className="success-message">{successMessage}</div>}
         <label>Email</label>
         <input
           type="email"
@@ -49,7 +49,6 @@ const Login = () => {
           Login
         </button>
       </form>
-    </div>
     </div>
   );
 };

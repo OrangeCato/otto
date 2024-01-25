@@ -73,6 +73,24 @@ export const loginUser = async (userData) => {
   }
 };
 
+export const fetchUserProfile = async () => {
+  try {
+    const response = await fetch(`{API_BASE_URL}/api/user/profile`, {
+      method: 'GET',
+      headers: await prepareHeaders(),
+      credentials: 'include',
+    });
+    if (!response.ok){
+      const errorData = await response.json();
+      throw new Error(`Failed to fetch user profile: ${errorData.message || 'Unknown error'}`)
+    }
+    return response.json();
+  } catch (error){
+    console.error('Error fetching user profile: ', error);
+    throw error;
+  }
+}
+
 export const addTask = async (newTaskData) => {
   try {
     const response = await fetch(`${API_BASE_URL}/api/tasks`, {

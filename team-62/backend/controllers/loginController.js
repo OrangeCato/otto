@@ -36,7 +36,7 @@ exports.authenticateUser = async (req, res) => {
                     console.error('Error signing token:', err);
                     return res.status(500).json({ error: 'Error generating token' });
                 }
-                res.json({ token, userId: user._id, email: user.email }); // Send the token and minimal user data
+                res.json({ token, username: user.name });
             }
         );
     } catch (error) {

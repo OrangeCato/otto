@@ -1,14 +1,18 @@
 import React from 'react'
 import CalendarComponent from './Calendar'
 import Header from './Header'
-import '../assets/homepage.css'
+import '../assets/dashboard.css'
+import {useAuth} from '../context/AuthContext'
 
-const HomePage = () => {
+const Dashboard = () => {
+  const { user } = useAuth(); // Access the auth state
+
   return (
     <div>
       <Header />
       <div className="container">
-        <h1>Dashboard</h1>
+      <h1>Dashboard</h1>
+      <h2>Hello, {user?.username}!</h2>
         <button id="log">Log Task</button>
         <CalendarComponent />
         {/*Previous tasks cards list */}
@@ -17,4 +21,4 @@ const HomePage = () => {
   )
 }
 
-export default HomePage
+export default Dashboard
