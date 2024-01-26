@@ -1,6 +1,7 @@
 .container {
   color: white;
   margin-top: 0;
+  position: relative;
 }
 
 h1, h2 {
@@ -29,14 +30,62 @@ h1, h2 {
   align-items: center;
 }
 
-#log {
-  background-color: white;
-  color: #270546;
-  margin: 20px;
-  margin-left: 65%;
+.add-button {
+  position: absolute;
+  left: 110px;
+  top: -60px;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+  transition: background-color 0.3s, transform 0.2s; /* Smooth transition for feedback */
 }
 
-#log:hover {
-  background-color: #460485;
-  color: white;
+.add-button:hover,
+.add-button:focus { /* Feedback on hover and focus for accessibility */
+  background-color: #72c73e; /* Darker shade for hover and focus */
+  transform: scale(1.1); /* Slightly enlarges the button */
+}
+
+.add-button:active { /* Feedback on click */
+  background-color: #9d9d9d; /* Even darker shade for click */
+  transform: scale(0.95); /* Slightly reduces the button size */
+}
+
+.add-button img {
+  width: 50px; /* Adjust based on your icon size */
+  height: auto;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }

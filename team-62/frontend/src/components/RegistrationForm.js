@@ -43,7 +43,7 @@ const RegistrationForm = () => {
   return (
     <div className="container">
       <form onSubmit={handleRegister}>
-        <h1>Register</h1>
+        <h1 className='form-header'>Register</h1>
         {errorMessage && <p className="error-message">{errorMessage}</p>}
         <label>Name</label>
         <input

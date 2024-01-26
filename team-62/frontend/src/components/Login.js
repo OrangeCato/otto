@@ -27,7 +27,7 @@ const Login = () => {
   return (
     <div className="container">
       <form>
-        <h1>Login</h1>
+        <h1 className='form-header'>Login</h1>
         {successMessage && <div className="success-message">{successMessage}</div>}
         <label>Email</label>
         <input
