@@ -1,3 +1,57 @@
-button {
-    margin: 10px;
+.about-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 50px;
+  border-radius: 8px;
+}
+
+.edit-fields {
+    margin-top: 50px;
+}
+.user-info {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.user-info span {
+  font-size: 16px;
+  color: #ffffff;
+}
+
+/* Style for input fields when in edit mode */
+.user-info input[type="text"],
+.user-info input[type="number"] {
+  padding: 8px;
+  width: 60%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Style for 'Edit' and 'Add' buttons */
+.user-info button {
+  padding: 6px 12px;
+  background-color: #ffffff;
+  color: black;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.user-info button:hover {
+  background-color: #58be0f;
+  color: white;
+}
+
+/* Fallback styles for when JavaScript is disabled */
+.no-js .user-info input,
+.no-js .user-info button {
+  display: none;
+}
+
+.no-js .user-info span {
+  display: block;
 }

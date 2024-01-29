@@ -9,7 +9,11 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'User',
         default: null // References another user, initially null
-    }
+    },
+    age: Number,
+    gender: String,
+    hasKids: Boolean,
+    hasPets: Boolean,
     // Add other user-related fields as needed
 });
 // Singleton pattern to avoid recompilation

@@ -31,9 +31,7 @@ h1, h2 {
 }
 
 .add-button {
-  position: absolute;
-  left: 110px;
-  top: -60px;
+  margin-left: 45vh;
   background-color: #ffffff;
   border: none;
   border-radius: 50%;
@@ -69,6 +67,7 @@ h1, h2 {
 }
 
 .dropdown-content {
+  margin-left: 30vh;
   display: none;
   position: absolute;
   background-color: #f9f9f9;

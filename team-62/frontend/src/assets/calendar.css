@@ -1,3 +1,9 @@
+.header {
+  font-size: 30px;
+  color: #333;
+  text-align: center;
+  margin: 0px;
+}
 .calendar {
   max-width: 100vh;
   margin: 0 auto;
@@ -6,28 +12,14 @@
   border-radius: 20px;
 }
 
-.header {
-  font-size: 30px;
-  color: #333;
-  text-align: center;
-  margin: 0px;
-}
-
 .calendar-container .react-calendar {
   width: 100%;
   border: none;
 }
 
-.calendar-container .react-calendar__navigation {
-  margin-bottom: 20px;
-  text-align: center;
-}
-
 .calendar-container .react-calendar__navigation button {
-  min-width: 44px;
   background: none;
-  font-size: 16px;
-  margin-top: 8px;
+  font-size: 15px;
 }
 
 .calendar-container .react-calendar__month-view__weekdays {
@@ -62,13 +54,6 @@
 .calendar-container .react-calendar__tile--active {
   background-color: #6200ee;
   color: white;
-}
-
-.text-center {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 20px;
-  color: #333;
 }
 
 .react-calendar__month-view__weekdays {
