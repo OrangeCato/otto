@@ -1,0 +1,24 @@
+/* history.css */
+.history-container {
+    margin-top: 20px;
+  }
+  
+  .history-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Adjust the gap between cards */
+  }
+  
+  .history-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    width: calc(33.333% - 10px); /* Adjust width for 3 cards in a row, accounting for gap */
+    text-align: left;
+  }
+  
+  .history-card h3 {
+    margin-top: 0;
+  }
+  

@@ -1,21 +1,22 @@
 const mongoose = require('mongoose');
 
-const taskSchema = new mongoose.Schema({
-    taskname: String,
-    rating: {
-        type: Number,
-        min: 1, // Minimum value for rating
-        max: 5, // Maximum value for rating
-    }
-});
-
 const userSchema = new mongoose.Schema({
-    name: String,
-    email: String,
-    password: String,
-    tasks: [taskSchema],
+    name: { type: String, required: true, trim: true },
+    email: { type: String, required: true, unique: true, trim: true },
+    password: { type: String, required: true },
+    pairingCode: { type: String }, // Optional, used for linking users
+    partnerId: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'User',
+        default: null // References another user, initially null
+    },
+    age: Number,
+    gender: String,
+    hasKids: Boolean,
+    hasPets: Boolean,
+    // Add other user-related fields as needed
 });
-
-const User = mongoose.model('User', userSchema);
+// Singleton pattern to avoid recompilation
+const User = mongoose.models.User || mongoose.model('User', userSchema);
 
 module.exports = User;

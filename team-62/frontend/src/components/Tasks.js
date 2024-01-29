@@ -1,6 +1,7 @@
-import React, { useState} from 'react'
+import React, { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import '../assets/tasks.css'
+import Header from './Header'
 
 const StarRating = ({ rating, setRating, editable = false }) => {
   const handleRating = (newRating) => {
@@ -28,11 +29,11 @@ const StarRating = ({ rating, setRating, editable = false }) => {
   )
 }
 const Tasks = () => {
-  const { user, addTask, updateTask, deleteTask } = useAuth();
-  const [newTask, setNewTask] = useState({ taskname: '', rating: 1 });
-  const [editedTask, setEditedTask] = useState({ taskname: '', rating: 1 });
-  const [editTaskId, setEditTaskId] = useState(null);
-  const [showNewTaskForm, setShowNewTaskForm] = useState(false);
+  const { user, addTask, updateTask, deleteTask } = useAuth()
+  const [newTask, setNewTask] = useState({ taskname: '', rating: 1 })
+  const [editedTask, setEditedTask] = useState({ taskname: '', rating: 1 })
+  const [editTaskId, setEditTaskId] = useState(null)
+  const [showNewTaskForm, setShowNewTaskForm] = useState(false)
 
   const handleAddTask = () => {
     // Check if the newTask's taskname is not empty
@@ -65,91 +66,100 @@ const Tasks = () => {
   }
 
   return (
-    <div className="task-container">
-      <h1 className="task-header">Tasks</h1>
-      <ul className="tasks-list">
-        {user && user.tasks && user.tasks.length > 0 ? (
-          user.tasks.map((task) => (
-            <li key={task._id} className="task-item">
-              {editTaskId === task._id ? (
-                <>
-                  <input
-                    type="text"
-                    value={editedTask.taskname}
-                    onChange={(e) =>
-                      setEditedTask({ ...editedTask, taskname: e.target.value })
-                    }
-                  />
-                  <div className="rating">
-                    <StarRating
-                      rating={editedTask.rating}
-                      setRating={(newRating) =>
-                        setEditedTask({ ...editedTask, rating: newRating })
+    <div>
+      <Header />
+      <div className="task-container">
+        <h1 className="task-header">Task List</h1>
+        <ul className="tasks-list">
+          {user && user.tasks && user.tasks.length > 0 ? (
+            user.tasks.map((task) => (
+              <li key={task._id} className="task-item">
+                {editTaskId === task._id ? (
+                  <>
+                    <input
+                      type="text"
+                      value={editedTask.taskname}
+                      onChange={(e) =>
+                        setEditedTask({
+                          ...editedTask,
+                          taskname: e.target.value,
+                        })
                       }
-                      editable
                     />
-                  </div>
-                  <button onClick={handleEditTask}>Save</button>
-                </>
-              ) : (
-                <>
-                  <div>{task.taskname}</div>
-                  <div className="rating">
-                    <StarRating rating={+task.rating} />
-                  </div>
-                  <div className="task-item-controls">
-                    <button id="edit" onClick={() => setEditTaskId(task._id)}>
-                      Edit
-                    </button>
-                    <button
-                      id="delete"
-                      onClick={() => handleDeleteTask(task._id)}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </>
-              )}
-            </li>
-          ))
-        ) : (
-          <li>Your task list is empty.</li>
-        )}
-      </ul>
-      <div className="new-task-container">
-        {!showNewTaskForm && (
-          <button onClick={() => setShowNewTaskForm(true)}>Add New Task</button>
-        )}
-
-        {showNewTaskForm && (
-          <>
-            <input
-              type="text"
-              value={newTask.taskname}
-              onChange={(e) =>
-                setNewTask({ ...newTask, taskname: e.target.value })
-              }
-              placeholder="Task name"
-            />
-            <div className="rating">
-              <StarRating
-                rating={newTask.rating}
-                setRating={(newRating) =>
-                  setNewTask({ ...newTask, rating: newRating })
-                }
-                editable
-              />
-            </div>
-            <button
-              onClick={() => {
-                handleAddTask()
-                setShowNewTaskForm(false) // Optionally hide form after submitting
-              }}
-            >
-              Submit
+                    <div className="rating">
+                      <StarRating
+                        rating={editedTask.rating}
+                        setRating={(newRating) =>
+                          setEditedTask({ ...editedTask, rating: newRating })
+                        }
+                        editable
+                      />
+                    </div>
+                    <button onClick={handleEditTask}>Save</button>
+                  </>
+                ) : (
+                  <>
+                    <div>{task.taskname}</div>
+                    <div className="rating">
+                      <StarRating rating={+task.rating} />
+                    </div>
+                    <div className="task-item-controls">
+                      <button id="edit" onClick={() => setEditTaskId(task._id)}>
+                        Edit
+                      </button>
+                      <button
+                        id="delete"
+                        onClick={() => handleDeleteTask(task._id)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </>
+                )}
+              </li>
+            ))
+          ) : (
+            <li>Your task list is empty.</li>
+          )}
+        </ul>
+        <div className="new-task-container">
+          {!showNewTaskForm && (
+            <button onClick={() => setShowNewTaskForm(true)}>
+              Add New Task
             </button>
-          </>
-        )}
+          )}
+
+          {showNewTaskForm && (
+            <>
+              <input
+                type="text"
+                value={newTask.taskname}
+                onChange={(e) =>
+                  setNewTask({ ...newTask, taskname: e.target.value })
+                }
+                placeholder="Task name"
+              />
+              <div className="rating">
+                <StarRating
+                  rating={newTask.rating}
+                  setRating={(newRating) =>
+                    setNewTask({ ...newTask, rating: newRating })
+                  }
+                  editable
+                />
+              </div>
+              <button
+                onClick={() => {
+                  handleAddTask()
+                  setShowNewTaskForm(false) // Optionally hide form after submitting
+                }}
+              >
+                Submit
+              </button>
+            </>
+          )}
+          <button>Log a task</button>
+        </div>
       </div>
     </div>
   )

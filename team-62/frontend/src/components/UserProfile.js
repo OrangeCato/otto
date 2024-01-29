@@ -1,37 +1,86 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import Tasks from './Tasks';
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
+import Header from './Header';
+import '../assets/userprofile.css';
 
 const UserProfile = () => {
-  const { user, logout } = useAuth();
-  //console.log('User in profile:', user);
-  const navigate = useNavigate();
+  const { user } = useAuth();
+  //const navigate = useNavigate();
 
-  // Check if the user is defined before accessing its properties
+  // State to manage edit mode for different fields
+  const [editMode, setEditMode] = useState({
+    name: false,
+    age: false,
+    gender: false,
+    // Add other fields as necessary
+  });
+
+  // Function to toggle edit mode on and off
+  const toggleEditMode = (field) => {
+    setEditMode((prev) => ({ ...prev, [field]: !prev[field] }));
+  };
+
+  // Function to handle field update
+  const handleUpdate = (field, value) => {
+    // Logic to update the user profile field in the database
+    console.log(`Updating ${field} to ${value}`);
+    toggleEditMode(field); // Turn off edit mode after update
+    // Update local user state or re-fetch user data as necessary
+  };
+
+  const handlePairing = () => {
+
+  }
+
   if (!user) {
-    // You might want to handle the case when the user is not defined
     return <p>No user information available.</p>;
   }
 
-  const handleLogout = async () => {
-    try {
-      // Call the logout function from your authentication context
-      await logout();
-      navigate('/');
-    } catch (error) {
-      console.error('Error logging out:', error);
-    }
-  };
-
   return (
-    <div className='container'>
-      <button onClick={handleLogout} id="logout">Logout</button>
-      <h1>Profile</h1>
-      <p>Hello, {user.name}!</p>
-      {/* Additional user profile information can be displayed here */}
-      <Tasks/>
-      <button  id="task-log">Log a task</button>
+    <div>
+      <Header />
+      <div className="about-container">
+        <h2>About You</h2>
+        <div className='edit-fields'>
+        <div className="user-info">
+          <span>Name: {user?.name || user?.username}</span>
+          {editMode.name ? (
+            <input type="text" defaultValue={user.name || user.username} onBlur={(e) => handleUpdate('name', e.target.value)} />
+          ) : (
+            <button onClick={() => toggleEditMode('name')}>Edit</button>
+          )}
+        </div>
+        <div className="user-info">
+          <span>Age: {user?.age || ' '}</span>
+          {editMode.age ? (
+            <input type="number" defaultValue={user.age || ''} onBlur={(e) => handleUpdate('age', e.target.value)} />
+          ) : (
+            <button onClick={() => toggleEditMode('age')}>{user.age ? 'Edit' : 'Add'}</button>
+          )}
+        </div>
+        <div className="user-info">
+          <span>Gender: {user?.gender || ' '}</span>
+          {editMode.gender ? (
+            <input type="string" defaultValue={user.gender || ''} onBlur={(e) => handleUpdate('gender', e.target.value)} />
+          ) : (
+            <button onClick={() => toggleEditMode('gender')}>{user.age ? 'Edit' : 'Add'}</button>
+          )}
+          </div>
+        </div>
+        {/* Continue with other fields - the following appears only if you are paired */}
+        {user.isPaired || user.pairingCode ? (
+          <>
+            <h2>About Your Relationship</h2>
+            {/* Relationship info goes here */}
+          </>
+        ) : (
+          <div className="user-info">
+            <span>Pair Account</span>
+            <button onClick={handlePairing}>Generate Code</button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

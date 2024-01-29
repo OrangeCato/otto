@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import {
+  fetchUserProfile,
   registerUser,
   loginUser,
   addTask as addTaskAPI,
@@ -12,6 +13,22 @@ const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    const initAuth = async () => {
+      const token = localStorage.getItem('token')
+      if (token) {
+        try {
+          const userProfile = await fetchUserProfile()
+          setUser(userProfile)
+        } catch (error) {
+          console.log('Error fetching user profile: ', error)
+          localStorage.removeItem('token') // remove token if invalid
+        }
+      }
+    }
+    initAuth()
+  }, [])
 
   useEffect(() => {
     const handleTaskUpdate = (data) => {
@@ -52,9 +69,11 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const { token, user } = await loginUser({ email, password })
-      localStorage.setItem('token', token)
-      setUser(user) // Assuming user contains the necessary data
+      const response = await loginUser({ email, password }) // loginUser is your API call to backend
+      const { token, username } = response // Destructure username from the response
+
+      localStorage.setItem('token', token) // Store token in localStorage
+      setUser({ token, username }) // Update your auth state with both token and username
     } catch (error) {
       console.error('Login error:', error)
     }

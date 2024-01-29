@@ -1,0 +1,88 @@
+.header {
+  font-size: 30px;
+  color: #333;
+  text-align: center;
+  margin: 0px;
+}
+.calendar {
+  max-width: 100vh;
+  margin: 0 auto;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 20px;
+}
+
+.calendar-container .react-calendar {
+  width: 100%;
+  border: none;
+}
+
+.calendar-container .react-calendar__navigation button {
+  background: none;
+  font-size: 15px;
+}
+
+.calendar-container .react-calendar__month-view__weekdays {
+  display: flex;
+  justify-content: space-around; /* for even spacing */
+  color: #333;
+  font-weight: bold;
+}
+
+.react-calendar__month-view__weekdays .react-calendar__month-view__weekdays__weekday {
+  text-align: center;
+  margin-bottom: 0.5em;
+}
+
+.react-calendar__month-view__days .react-calendar__tile {
+  width: 14.28%; /* 100% / 7 days of the week */
+  padding: 10px 0; /* Adjust padding as needed */
+  text-align: center; /* Make sure text is centered */
+}
+
+.calendar-container .react-calendar__tile:enabled:hover,
+.calendar-container .react-calendar__tile:enabled:focus {
+  background-color: #e0e0e0;
+}
+
+.calendar-container .react-calendar__tile--now {
+  background-color: #ffeced;
+  color: #d10000;
+  font-weight: bold;
+}
+
+.calendar-container .react-calendar__tile--active {
+  background-color: #6200ee;
+  color: white;
+}
+
+.react-calendar__month-view__weekdays {
+  display: flex;
+  justify-content: center;
+  color: #333;
+  font-weight: bold;
+}
+
+.react-calendar__month-view__weekdays .react-calendar__month-view__weekdays__weekday {
+  flex: 1;
+  text-align: center;
+  margin-bottom: 0.5em;
+}
+
+/* Day cells are center aligned and have equal width */
+.react-calendar__month-view__days .react-calendar__tile {
+  flex-grow: 1;
+  width: calc(100% / 7);
+  padding: 10px 0;
+}
+
+.calendar-container .react-calendar__navigation button:hover,
+.calendar-container .react-calendar__navigation button:focus {
+  color: #333;
+  background-color: #e0e0e0;
+}
+
+.calendar-container .react-calendar__navigation button:hover svg,
+.calendar-container .react-calendar__navigation button:focus svg {
+  fill: #333;
+}
