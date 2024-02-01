@@ -27,6 +27,10 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "setupFilesAfterEnv": ["team-62/frontend/src/test.js"]
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
