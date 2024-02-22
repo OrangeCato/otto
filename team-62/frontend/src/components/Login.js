@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import '../assets/form.css';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import '../assets/form.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -29,16 +29,18 @@ const Login = () => {
       <form>
         <h1 className='form-header'>Login</h1>
         {successMessage && <div className="success-message">{successMessage}</div>}
-        <label>Email</label>
+        <label htmlFor="email">Email</label>
         <input
+          id="email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
         <br />
-        <label>Password</label>
+        <label htmlFor="password">Password</label>
         <input
+          id="password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}

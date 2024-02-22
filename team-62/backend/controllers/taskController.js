@@ -82,3 +82,19 @@ exports.deleteTask = async (req, res) => {
     res.status(500).json({ error: 'Task deletion failed' });
   }
 };
+
+exports.fetchTasks = async (req, res) => {
+  try {
+    const userId = req.user._id; // Assuming you have the user ID from the authenticated user
+
+    const tasks = await Task.find({ createdBy: userId }); // Find tasks created by the user
+    if (!tasks) {
+      return res.status(404).json({ error: 'No tasks found for this user' });
+    }
+
+    res.status(200).json(tasks); // Send the tasks associated with the user
+  } catch (error) {
+    console.error('Error fetching tasks: ', error);
+    res.status(500).json({ error: 'Failed to fetch tasks' });
+  }
+};

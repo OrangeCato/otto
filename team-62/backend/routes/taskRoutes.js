@@ -4,6 +4,13 @@ const taskController = require('../controllers/taskController');
 const { taskValidationMiddleware } = require('../middlewares/taskValidationMiddleware');
 const { authenticateUser } = require('../middlewares/authenticationMiddleware');
 
+// fetch tasks
+router.get(
+  '/tasks',
+  authenticateUser,
+  taskController.fetchTasks
+);
+
 // Create a new task
 router.post(
   '/',
