@@ -1,0 +1,56 @@
+.log-task-container {
+  text-align: center;
+}
+
+.task-timer {
+  margin-top: 20px;
+}
+
+.timer-display {
+  font-size: 48px;
+  margin: 20px 0;
+}
+
+.task-actions button {
+  margin: 0 10px;
+  padding: 10px 20px;
+}
+
+.task-selection ul {
+  list-style: none;
+  padding: 0;
+}
+
+.task-selection li button {
+  margin-top: 10px;
+}
+
+.task-card {
+  transition: transform 0.3s;
+}
+
+.task-card:hover {
+  transform: scale(1.05);
+}
+
+.star-icon {
+  width: 20px; /* Adjust size as needed */
+  height: auto;
+  margin-right: 2px; /* Space between stars */
+}
+
+.task-card-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ebe8fc;
+  color: rgb(45, 6, 71);
+  padding: 30px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.task-rating {
+  display: flex;
+  align-items: center;
+}

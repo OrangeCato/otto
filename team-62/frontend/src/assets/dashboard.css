@@ -31,8 +31,8 @@ h1, h2 {
 }
 
 .add-button {
+  background-color: transparent;
   margin-left: 45vh;
-  background-color: #72c73e;
   border: none;
   border-radius: 50%;
   width: 40px;
@@ -47,7 +47,7 @@ h1, h2 {
 
 .add-button:hover,
 .add-button:focus { /* Feedback on hover and focus for accessibility */
-  background-color: #72c73e; /* Darker shade for hover and focus */
+  background-color: transparent;
   transform: scale(1.1); /* Slightly enlarges the button */
 }
 

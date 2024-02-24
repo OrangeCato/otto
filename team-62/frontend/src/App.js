@@ -20,7 +20,7 @@ const App = () => {
           <Route path="/home" element={<ProtectedRoute component={Dashboard} />} />
           <Route path="/profile" element={<ProtectedRoute component={UserProfile} />} />
           <Route path="/tasks" element={<ProtectedRoute component={Tasks} />} />
-          <Route path="/tasks" element={<ProtectedRoute component={LogTask}/>}/>
+          <Route path="/log-task" element={<ProtectedRoute component={LogTask}/>}/>
         </Routes>
       </BrowserRouter>
     </AuthProvider>

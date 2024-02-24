@@ -3,7 +3,7 @@ import CalendarComponent from './Calendar'
 import Header from './Header'
 import '../assets/dashboard.css'
 import { useAuth } from '../context/AuthContext'
-import addButtonIcon from '../assets/icons/add-button.png'
+import addButtonIcon from '../assets/icons/add.png'
 import { Link } from 'react-router-dom'
 
 const Dashboard = () => {

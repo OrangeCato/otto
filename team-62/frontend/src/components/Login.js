@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useNavigate, Link } from 'react-router-dom'
 import '../assets/form.css';
 
 const Login = () => {
@@ -50,6 +51,11 @@ const Login = () => {
         <button type="button" onClick={handleLogin}>
           Login
         </button>
+        <p>
+          Don't have an account yet?
+          <br />
+          <Link to="/">Register</Link> instead.
+        </p>
       </form>
     </div>
   );
