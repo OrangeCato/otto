@@ -4,8 +4,9 @@ const taskSocketHandler = require('./taskSocketHandler'); // Adjust the path if 
 const setupWebSocket = (server) => {
     const io = socketIo(server, {
         cors: {
-            origin: "http://localhost:3000", // Adjust to your front-end URL
-            methods: ["GET", "POST"]
+            origin: ["http://localhost:3000", "http://localhost:3001"], // Adjust to your front-end URL
+            methods: ["GET", "POST"],
+            credentials: true
         }
     });
 

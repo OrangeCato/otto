@@ -3,10 +3,21 @@ import CalendarComponent from './Calendar'
 import Header from './Header'
 import '../assets/dashboard.css'
 import { useAuth } from '../context/AuthContext'
-import addButtonIcon from '../assets/icons/add-button.png'
+import addButtonIcon from '../assets/icons/add.png'
+import { Link } from 'react-router-dom'
 
 const Dashboard = () => {
-  const { user } = useAuth()
+  const { user, fetchTasks } = useAuth()
+
+  const handleLogTaskClick = async () => {
+    try {
+      const tasks = await fetchTasks() // Fetch tasks when "Log Task" is clicked
+      console.log('Tasks fetched on button click:', tasks)
+      // Proceed with whatever you want to do with the tasks, e.g., display them
+    } catch (error) {
+      console.error('Failed to fetch tasks on button click:', error)
+    }
+  }
 
   return (
     <div>
@@ -21,7 +32,9 @@ const Dashboard = () => {
             <img src={addButtonIcon} alt="Add" />
           </button>
           <div className="dropdown-content">
-            <a href="#log-task">Log Task</a>
+            <Link to="/log-task" className="dropdown-item" onClick={handleLogTaskClick}>
+              Log Task
+            </Link>
             <a href="#log-expense">Log Expense</a>
           </div>
         </div>

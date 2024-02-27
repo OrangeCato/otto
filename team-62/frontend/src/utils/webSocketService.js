@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 
-const SOCKET_URL = "http://localhost:3000"; // Replace with your server URL
+const SOCKET_URL = "http://localhost:3000"; // Adjust this to your server URL
 
 class WebSocketService {
     socket;
@@ -9,7 +9,7 @@ class WebSocketService {
 
     connect() {
         this.socket = io(SOCKET_URL, {
-            // Additional options if needed, like authentication tokens
+            // Additional options if needed, such as authentication tokens
             reconnectionAttempts: this.maxAttempts,
         });
 
@@ -66,6 +66,16 @@ class WebSocketService {
         if (this.socket) {
             this.socket.disconnect();
         }
+    }
+
+    // Method to request tasks from the server
+    fetchTasks() {
+        this.emit('fetchTasks');
+    }
+
+    // Method to subscribe to tasks being fetched
+    onTasksFetched(callback) {
+        this.on('tasksFetched', callback);
     }
 
     // Example: Subscribe to task updates
